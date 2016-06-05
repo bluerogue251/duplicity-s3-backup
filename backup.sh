@@ -58,7 +58,7 @@ duplicity \
     --verbosity notice \
     --s3-use-new-style \
     --asynchronous-upload \
-    --volsize 50 \
+    --volsize 25 \
     --log-file ~/.duplicity/duplicity.log \
     $LOCAL_DIRECTORY_TO_BACK_UP s3+http://$S3_BUCKET_NAME/
 
