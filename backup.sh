@@ -46,7 +46,7 @@ set -eou pipefail
 #   LOCAL_DIRECTORY_TO_BACK_UP=/home/teddy
 #   INCLUDE_EXCLUDE_CLAUSE="--include /home/teddy/backed_up --include /home/teddy/.bashrc --exclude /home/teddy"
 #
-# Make an encrypted, offsite backup of the values you put in ~/.duplicity/config -- separate
+# Make a encrypted, offsite backup of the values you put in ~/.duplicity/config. Make it separately
 # from this duplicity backup. This way, if you ever lose access to your machine or to
 # the ~/.duplicity/config file, you will still be able to restore and decrypt your backup elsewhere.
 
