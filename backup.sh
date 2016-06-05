@@ -15,7 +15,7 @@ set -eou pipefail
 #
 #
 # Create an S3 bucket to use for backup.
-# Add an AWS user with permissions just for that bucket. Example IAM policy:
+# Add an AWS IAM user with permissions just for that bucket. Example IAM policy:
 # {
 #     "Version": "2012-10-17",
 #     "Statement": [
@@ -40,11 +40,14 @@ set -eou pipefail
 #
 # Fill in ~/.duplicity/config with:
 #   PASSPHRASE=<your_symmetric_encryption_passphrase>
-#   AWS_ACCESS_KEY_ID=<your_aws_access_key>
-#   AWS_SECRET_ACCESS_KEY=<your_aws_secret_access_key>
+#   AWS_ACCESS_KEY_ID=<your_aws_iam_duplicity_user_access_key>
+#   AWS_SECRET_ACCESS_KEY=<your_aws_iam_duplicity_user_secret_access_key>
 #   S3_BUCKET_NAME=<name_of_your_s3_bucket>
 #   LOCAL_DIRECTORY_TO_BACK_UP=/home/teddy
 #   INCLUDE_EXCLUDE_CLAUSE="--include /home/teddy/backed_up --include /home/teddy/.bashrc --exclude /home/teddy"
+#
+# The above example recursively backs up /home/teddy/backed_up and /home/teddy/.bashrc and
+# does not back up anything else on your machine.
 #
 # Make a encrypted, offsite backup of the values you put in ~/.duplicity/config. Make it separately
 # from this duplicity backup. This way, if you ever lose access to your machine or to
