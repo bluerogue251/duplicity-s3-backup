@@ -70,7 +70,7 @@ duplicity \
     --volsize 25 \
     --log-file ~/.duplicity/duplicity.log \
     $INCLUDE_EXCLUDE_CLAUSE \
-    /home/teddy s3+http://$S3_BUCKET_NAME/
+    $LOCAL_DIRECTORY_TO_BACK_UP s3+http://$S3_BUCKET_NAME/
 
 
 # # To list files in backup, run:
