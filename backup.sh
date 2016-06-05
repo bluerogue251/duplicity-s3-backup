@@ -4,7 +4,7 @@ set -eou pipefail
 # Adapted from http://kappataumu.com/articles/cloud-backups-duplicity-s3.html
 #
 #
-# Setup:
+# Install dependencies:
 # $ sudo apt-get install python-software-properties
 # $ sudo apt-get install software-properties-common
 # $ sudo apt-add-repository ppa:duplicity-team/ppa
@@ -13,7 +13,8 @@ set -eou pipefail
 # $ sudo apt-get install duplicity python-boto haveged
 #
 #
-# Set up an S3 bucket to use for backup.
+#
+# Create an S3 bucket to use for backup.
 # Add an AWS user with permissions just for that bucket. Example IAM policy:
 # {
 #     "Version": "2012-10-17",
@@ -29,11 +30,13 @@ set -eou pipefail
 # }
 #
 #
+#
+# Configure your backup:
+#
 # $ mkdir ~/.duplicity
 # $ touch ~/.duplicity/config
 # $ chmod 600 ~/.duplicity/config
 # $ sudo chown root ~/.duplicity/config
-#
 #
 # Fill in ~/.duplicity/config with:
 #   PASSPHRASE=<your_symmetric_encryption_passphrase>
@@ -43,7 +46,9 @@ set -eou pipefail
 #   LOCAL_DIRECTORY_TO_BACK_UP=/home/teddy
 #   INCLUDE_EXCLUDE_CLAUSE="--include /home/teddy/backed_up --include /home/teddy/.bashrc --exclude /home/teddy"
 #
-# Ensure you record the values you put in ~/.duplicity/config encrypted and offsite somewhere.
+# Make an encrypted, offsite backup of the values you put in ~/.duplicity/config -- separate
+# from this duplicity backup. This way, if you ever lose access to your machine or to
+# the ~/.duplicity/config file, you will still be able to restore and decrypt your backup elsewhere.
 
 source "$HOME/.duplicity/config"
 
@@ -68,13 +73,13 @@ duplicity \
     /home/teddy s3+http://$S3_BUCKET_NAME/
 
 
-# To list files in backup, run:
+# # To list files in backup, run:
 # duplicity list-current-files \
 #     --s3-use-new-style \
 #     s3+http://$S3_BUCKET_NAME
 
 
-# To restore, run `$ mkdir ~/duplicity-restore` then:
+# # To restore, run `$ mkdir ~/duplicity-restore` then:
 # duplicity restore \
 #     --verbosity notice \
 #     --s3-use-new-style \
