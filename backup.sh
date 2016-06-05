@@ -13,8 +13,10 @@ set -eou pipefail
 # $ sudo apt-get install duplicity python-boto haveged
 #
 #
-# Set up an S3 bucket to use for backup, and an AWS user with permissions just for that bucket.
-# Example IAM policy:
+# Set up an S3 bucket to use for backup.
+# For lower AWS costs, set up a Lifecyle rule on the bucket to transition
+# objects to "Standard - Infrequent Access" S3 Storage Class.
+# Add an AWS user with permissions just for that bucket. Example IAM policy:
 # {
 #     "Version": "2012-10-17",
 #     "Statement": [
@@ -32,6 +34,7 @@ set -eou pipefail
 # $ mkdir ~/.duplicity
 # $ touch ~/.duplicity/config
 # $ chmod 600 ~/.duplicity/config
+# $ sudo chown root ~/.duplicity/config
 #
 #
 # Fill in ~/.duplicity/config with:
@@ -55,7 +58,7 @@ duplicity \
     --verbosity notice \
     --s3-use-new-style \
     --asynchronous-upload \
-    --volsize 200 \
+    --volsize 50 \
     --log-file ~/.duplicity/duplicity.log \
     $LOCAL_DIRECTORY_TO_BACK_UP s3+http://$S3_BUCKET_NAME/
 
