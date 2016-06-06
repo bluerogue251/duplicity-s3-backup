@@ -53,7 +53,7 @@ set -eou pipefail
 # from this duplicity backup. This way, if you ever lose access to your machine or to
 # the ~/.duplicity/config file, you will still be able to restore and decrypt your backup elsewhere.
 
-sudo source "$HOME/.duplicity/config"
+source "$HOME/.duplicity/config"
 
 export PASSPHRASE
 export AWS_ACCESS_KEY_ID
@@ -67,8 +67,9 @@ export INCLUDE_EXCLUDE_CLAUSE
 # To backup, run:
 duplicity \
     --name trw-personal \
-    --verbosity Info \
+    --verbosity Notice \
     --progress \
+    --progress-rate 60 \
     --s3-use-new-style \
     --s3-use-ia \
     --asynchronous-upload \
