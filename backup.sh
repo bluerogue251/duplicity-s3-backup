@@ -53,7 +53,7 @@ set -eou pipefail
 # from this duplicity backup. This way, if you ever lose access to your machine or to
 # the ~/.duplicity/config file, you will still be able to restore and decrypt your backup elsewhere.
 
-source "$HOME/.duplicity/config"
+sudo source "$HOME/.duplicity/config"
 
 export PASSPHRASE
 export AWS_ACCESS_KEY_ID
@@ -63,17 +63,19 @@ export LOCAL_DIRECTORY_TO_BACK_UP
 export INCLUDE_EXCLUDE_CLAUSE
 
 
+# (The s3.amazonaws.com endpoint below assumes you chose US Standard / US East (N. Virginia) as your bucket region)
 # To backup, run:
 duplicity \
-    --verbosity notice \
+    --name trw-personal \
+    --verbosity Info \
+    --progress \
     --s3-use-new-style \
     --s3-use-ia \
-    --s3-use-multiprocessing \
     --asynchronous-upload \
     --volsize 25 \
     --log-file ~/.duplicity/duplicity.log \
     $INCLUDE_EXCLUDE_CLAUSE \
-    $LOCAL_DIRECTORY_TO_BACK_UP s3+http://$S3_BUCKET_NAME/
+    $LOCAL_DIRECTORY_TO_BACK_UP s3://s3.amazonaws.com/$S3_BUCKET_NAME
 
 
 # # To list files in backup, run:
