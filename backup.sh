@@ -79,21 +79,6 @@ duplicity \
     $LOCAL_DIRECTORY_TO_BACK_UP s3://s3.amazonaws.com/$S3_BUCKET_NAME
 
 
-# # To list files in backup, run:
-# duplicity list-current-files \
-#     --s3-use-new-style \
-#     s3+http://$S3_BUCKET_NAME
-
-
-# # To restore, run `$ mkdir ~/duplicity-restore` then:
-# duplicity restore \
-#     --verbosity notice \
-#     --s3-use-new-style \
-#     [--time '2016-01-03'] \
-#     [--file-to-restore foo/bar/baz.txt] \
-#     s3+http://$S3_BUCKET_NAME ~/duplicity-restore/foo/bar/baz-restored.txt
-
-
 unset PASSPHRASE
 unset AWS_ACCESS_KEY_ID
 unset AWS_SECRET_ACCESS_KEY
