@@ -61,12 +61,13 @@ export AWS_SECRET_ACCESS_KEY
 export S3_BUCKET_NAME
 export LOCAL_DIRECTORY_TO_BACK_UP
 export INCLUDE_EXCLUDE_CLAUSE
+export BACKUP_NAME
 
 
 # (The s3.amazonaws.com endpoint below assumes you chose US Standard / US East (N. Virginia) as your bucket region)
 # To backup, run:
 duplicity \
-    --name trw-personal \
+    --name $BACKUP_NAME \
     --verbosity Notice \
     --progress \
     --progress-rate 60 \
@@ -85,3 +86,4 @@ unset AWS_SECRET_ACCESS_KEY
 unset S3_BUCKET_NAME
 unset LOCAL_DIRECTORY_TO_BACK_UP
 unset INCLUDE_EXCLUDE_CLAUSE
+unset BACKUP_NAME

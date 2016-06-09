@@ -12,11 +12,12 @@ export AWS_ACCESS_KEY_ID
 export AWS_SECRET_ACCESS_KEY
 export S3_BUCKET_NAME
 export LOCAL_DIRECTORY_TO_BACK_UP
+export BACKUP_NAME
 
 RELATIVE_PATH_TO_VERIFY=$1
 
 duplicity verify \
-    --name trw-personal \
+    --name $BACKUP_NAME \
     --verbosity Notice \
     --compare-data \
     --file-to-restore "$RELATIVE_PATH_TO_VERIFY" \
@@ -27,3 +28,4 @@ unset AWS_ACCESS_KEY_ID
 unset AWS_SECRET_ACCESS_KEY
 unset S3_BUCKET_NAME
 unset LOCAL_DIRECTORY_TO_BACK_UP
+unset BACKUP_NAME
