@@ -39,6 +39,7 @@ set -eou pipefail
 # $ sudo chown root ~/.duplicity/config
 #
 # Fill in ~/.duplicity/config with:
+#   BACKUP_NAME=trw-personal
 #   PASSPHRASE=<your_symmetric_encryption_passphrase>
 #   AWS_ACCESS_KEY_ID=<your_aws_iam_duplicity_user_access_key>
 #   AWS_SECRET_ACCESS_KEY=<your_aws_iam_duplicity_user_secret_access_key>
